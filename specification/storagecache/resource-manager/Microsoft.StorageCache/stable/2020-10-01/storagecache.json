@@ -3,7 +3,7 @@
   "info": {
     "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage Caches.",
     "title": "Storage Cache Mgmt Client",
-    "version": "2020-03-01"
+    "version": "2020-10-01"
   },
   "host": "management.azure.com",
   "basePath": "/",
@@ -994,6 +994,9 @@
         "x-ms-examples": {
           "StorageTargets_CreateOrUpdate": {
             "$ref": "./examples/StorageTargets_CreateOrUpdate.json"
+          },
+          "StorageTargets_CreateOrUpdate_NoJunctions": {
+            "$ref": "./examples/StorageTargets_CreateOrUpdate_NoJunctions.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1520,7 +1523,6 @@
     "StorageTargetProperties": {
       "type": "object",
       "description": "Properties of the Storage Target.",
-      "discriminator": "targetType",
       "required": [
         "targetType"
       ],
@@ -1575,16 +1577,6 @@
         }
       }
     },
-    "Nfs3TargetProperties": {
-      "description": "An NFSv3 mount point for use as a Storage Target.",
-      "type": "object",
-      "x-ms-discriminator-value": "nfs3",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTargetProperties"
-        }
-      ]
-    },
     "Nfs3Target": {
       "description": "Properties pertained to Nfs3Target",
       "properties": {
@@ -1599,16 +1591,6 @@
         }
       }
     },
-    "ClfsTargetProperties": {
-      "description": "Storage container for use as a CLFS Storage Target.",
-      "type": "object",
-      "x-ms-discriminator-value": "clfs",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTargetProperties"
-        }
-      ]
-    },
     "ClfsTarget": {
       "description": "Properties pertained to ClfsTarget",
       "properties": {
@@ -1617,16 +1599,6 @@
           "$ref": "#/definitions/URLString"
         }
       }
-    },
-    "UnknownTargetProperties": {
-      "description": "Storage container for use as an Unknown Storage Target.",
-      "type": "object",
-      "x-ms-discriminator-value": "unknown",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTargetProperties"
-        }
-      ]
     },
     "UnknownTarget": {
       "description": "Properties pertained to UnknownTarget",

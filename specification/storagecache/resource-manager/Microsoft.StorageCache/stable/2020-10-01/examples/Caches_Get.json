@@ -3,7 +3,7 @@
     "resourceGroupName": "scgroup",
     "cacheName": "sc1",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2020-03-01"
+    "api-version": "2020-10-01"
   },
   "responses": {
     "200": {
@@ -36,6 +36,14 @@
           },
           "networkSettings": {
             "mtu": 1500
+          },
+          "encryptionSettings": {
+            "keyEncryptionKey": {
+              "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
+              "sourceVault": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+              }
+            }
           }
         },
         "sku": {
