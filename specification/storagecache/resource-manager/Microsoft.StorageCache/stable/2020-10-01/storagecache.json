@@ -1284,6 +1284,10 @@
             "securitySettings": {
               "$ref": "#/definitions/CacheSecuritySettings",
               "description": "Specifies security settings of the cache."
+            },
+            "directoryServicesSettings": {
+              "$ref": "#/definitions/CacheDirectorySettings",
+              "description": "Specifies Directory Services settings of the cache."
             }
           },
           "type": "object"
@@ -1365,6 +1369,79 @@
         "rootSquash": {
           "type": "boolean",
           "description": "root squash of cache property."
+        }
+      }
+    },
+    "CacheDirectorySettings": {
+      "description": "Cache Directory Services settings.",
+      "properties": {
+        "usernameDownload" : {
+          "$ref": "#/definitions/CacheUsernameDownloadSettings",
+          "description": "Specifies the settings for Extended Groups. Extended Groups allows users to be members of more than 16 groups."
+        }
+      }
+    },
+    "CacheUsernameDownloadSettings": {
+      "description": "Settings for username and group download for Extended groups.",
+      "properties": {
+        "extendedGroups": {
+          "type": "boolean",
+          "description": "This indicates if Extended Groups is enabled."
+        },
+        "usernameSource": {
+          "description": "This setting determines how the system gets username and group names for clients.",
+          "enum" : [
+            "LDAP",
+            "File"
+          ],
+          "x-ms-enum": {
+            "name": "UsernameSource",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "groupFileURI": {
+          "type": "string",
+          "description": "The URI of the file containing the group (etc/group) information. This field must be populated when 'usernameSource' is set to 'File'."
+        },
+        "userFileURI": {
+          "type": "string",
+          "description": "The URI of the file containing the user (etc/passwd) information. This field must be populated when 'usernameSource' is set to 'File'."
+        },
+        "ldapServer": {
+          "type": "string",
+          "description": "The fully qualified domain name or IP address of the LDAP server to use."
+        },
+        "ldapBaseDN": {
+          "type": "string",
+          "description": "The base distinguished name for the LDAP domain."
+        },
+        "encryptLdapConnection": {
+          "type": "boolean",
+          "description": "This indicates if the LDAP connection should be encrypted."
+        },
+        "requireValidCertificate": {
+          "type": "boolean",
+          "description": "Determines if the certificates should be validated by a certificate authority. When true caCerticateURI must be provided."
+        },
+        "autoDownloadCertificate": {
+          "type": "boolan",
+          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCerticateURI' when 'requireValidCerticate' is true, or a self signed certicate otherwise."
+        },
+        "caCertificateURI": {
+          "type": "string",
+          "description": "The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to 'true'."
+        },
+        "credentials": {
+          "description": "When present, these are the credentials for secure LDAP connection.",
+          "bindDnSecretURI": {
+            "type": "string",
+            "description": "URI for the keyvault secret which contains the Bind Distinguished Name identity to be used in the secure LDAP connection."
+          },
+          "bindPasswordSecretURI":{
+            "type": "string",
+            "description": "URI for the keyvault secret which contains the Bind password to be used in the secure LDAP connection."
+          }
         }
       }
     },
