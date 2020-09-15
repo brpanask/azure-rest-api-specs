@@ -1425,7 +1425,7 @@
           "description": "Determines if the certificates should be validated by a certificate authority. When true caCerticateURI must be provided."
         },
         "autoDownloadCertificate": {
-          "type": "boolan",
+          "type": "boolean",
           "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCerticateURI' when 'requireValidCerticate' is true, or a self signed certicate otherwise."
         },
         "caCertificateURI": {
@@ -1434,13 +1434,15 @@
         },
         "credentials": {
           "description": "When present, these are the credentials for secure LDAP connection.",
-          "bindDnSecretURI": {
-            "type": "string",
-            "description": "URI for the keyvault secret which contains the Bind Distinguished Name identity to be used in the secure LDAP connection."
-          },
-          "bindPasswordSecretURI":{
-            "type": "string",
-            "description": "URI for the keyvault secret which contains the Bind password to be used in the secure LDAP connection."
+          "properties": {
+            "bindDnSecretURI": {
+              "type": "string",
+              "description": "URI for the keyvault secret which contains the Bind Distinguished Name identity to be used in the secure LDAP connection."
+            },
+            "bindPasswordSecretURI": {
+              "type": "string",
+              "description": "URI for the keyvault secret which contains the Bind password to be used in the secure LDAP connection."
+            }
           }
         }
       }
