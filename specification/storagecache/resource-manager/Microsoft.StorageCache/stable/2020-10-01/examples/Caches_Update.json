@@ -16,7 +16,20 @@
           "mtu": 1400
         },
         "securitySettings" : {
-          "rootSquash" : true
+          "accessPolicies" : [
+            {
+              "name": "Default",
+              "rules": [
+                {
+                  "scope": "default",
+                  "access": "rw",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": false
+                }
+              ]
+            }
+          ]
         }
       },
       "sku": {
@@ -57,7 +70,50 @@
             "mtu": 1400
           },
           "securitySettings": {
-            "rootSquash" : true
+            "accessPolicies": [
+              {
+                "name": "default",
+                "rules": [
+                  {
+                    "scope": "default",
+                    "access": "rw",
+                    "suid": false,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  }
+                ]
+              },
+              {
+                "name": "restrictive",
+                "rules": [
+                  {
+                    "scope": "host",
+                    "filter": "10.99.3.145",
+                    "access": "rw",
+                    "suid": true,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  },
+                  {
+                    "scope": "network",
+                    "filter": "10.99.1.0/24",
+                    "access": "rw",
+                    "suid": true,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  },
+                  {
+                    "scope": "default",
+                    "access": "no",
+                    "suid": false,
+                    "submountAccess": true,
+                    "rootSquash": true,
+                    "anonymousUID": "-2",
+                    "anonymousGID": "-2"
+                  }
+                ]
+              }
+            ]
           }
         },
         "sku": {
