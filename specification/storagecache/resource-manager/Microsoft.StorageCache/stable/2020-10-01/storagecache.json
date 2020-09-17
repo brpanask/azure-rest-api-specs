@@ -1378,7 +1378,7 @@
           "description": "Name identifying this policy.  Access Policy names are not case sensitive.",
           "type": "string"
         },
-        "rules": {
+        "accessRules": {
           "description": "The set of rules describing client accesses allowed under this policy.",
           "type": "array",
           "items": {
@@ -1825,7 +1825,7 @@
           "description": "NFS export where targetPath exists.",
           "type": "string"
         },
-        "accessPolicy": {
+        "nfsAccessPolicy": {
           "description": "Name of the access policy applied to this junction.",
           "type": "string"
         }

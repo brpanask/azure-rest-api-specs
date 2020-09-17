@@ -19,7 +19,7 @@
           "accessPolicies" : [
             {
               "name": "default",
-              "rules": [
+              "accessRules": [
                 {
                   "scope": "default",
                   "access": "rw",
@@ -31,7 +31,7 @@
             },
             {
               "name": "restrictive",
-              "rules": [
+              "accessRules": [
                 {
                   "scope": "host",
                   "filter": "10.99.3.145",
@@ -103,7 +103,7 @@
             "accessPolicies": [
               {
                 "name": "default",
-                "rules": [
+                "accessRules": [
                   {
                     "scope": "default",
                     "access": "rw",
@@ -115,7 +115,7 @@
               },
               {
                 "name": "restrictive",
-                "rules": [
+                "accessRules": [
                   {
                     "scope": "host",
                     "filter": "10.99.3.145",

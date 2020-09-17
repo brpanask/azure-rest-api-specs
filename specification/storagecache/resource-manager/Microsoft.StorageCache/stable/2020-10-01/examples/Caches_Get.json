@@ -41,7 +41,7 @@
             "accessPolicies": [
               {
                 "name": "default",
-                "rules": [
+                "accessRules": [
                   {
                     "scope": "default",
                     "access": "rw",

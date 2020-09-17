@@ -12,13 +12,13 @@
             "namespacePath": "/path/on/cache",
             "targetPath": "/path/on/exp1",
             "nfsExport": "exp1",
-            "accessPolicy": "default"
+            "nfsAccessPolicy": "default"
           },
           {
             "namespacePath": "/path2/on/cache",
             "targetPath": "/path2/on/exp2",
             "nfsExport": "exp2",
-            "accessPolicy": "rootSquash"
+            "nfsAccessPolicy": "rootSquash"
           }
         ],
         "targetType": "nfs3",
@@ -41,13 +41,13 @@
               "namespacePath": "/path/on/cache",
               "targetPath": "/path/on/exp1",
               "nfsExport": "exp1",
-              "accessPolicy": "default"
+              "nfsAccessPolicy": "default"
             },
             {
               "namespacePath": "/path2/on/cache",
               "targetPath": "/path2/on/exp2",
               "nfsExport": "exp2",
-              "accessPolicy": "rootSquash"
+              "nfsAccessPolicy": "rootSquash"
             }
           ],
           "targetType": "nfs3",
@@ -69,13 +69,13 @@
               "namespacePath": "/path/on/cache",
               "targetPath": "/path/on/exp1",
               "nfsExport": "exp1",
-              "accessPolicy": "default"
+              "nfsAccessPolicy": "default"
             },
             {
               "namespacePath": "/path2/on/cache",
               "targetPath": "/path2/on/exp2",
               "nfsExport": "exp2",
-              "accessPolicy": "rootSquash"
+              "nfsAccessPolicy": "rootSquash"
             }
           ],
           "targetType": "nfs3",
@@ -97,13 +97,13 @@
               "namespacePath": "/path/on/cache",
               "targetPath": "/path/on/exp1",
               "nfsExport": "exp1",
-              "accessPolicy": "default"
+              "nfsAccessPolicy": "default"
             },
             {
               "namespacePath": "/path2/on/cache",
               "targetPath": "/path2/on/exp2",
               "nfsExport": "exp2",
-              "accessPolicy": "rootSquash"
+              "nfsAccessPolicy": "rootSquash"
             }
           ],
           "targetType": "nfs3",
