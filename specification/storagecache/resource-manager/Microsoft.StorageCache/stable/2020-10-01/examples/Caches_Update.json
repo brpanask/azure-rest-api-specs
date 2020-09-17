@@ -18,7 +18,7 @@
         "securitySettings" : {
           "accessPolicies" : [
             {
-              "name": "Default",
+              "name": "default",
               "rules": [
                 {
                   "scope": "default",
@@ -26,6 +26,36 @@
                   "suid": false,
                   "submountAccess": true,
                   "rootSquash": false
+                }
+              ]
+            },
+            {
+              "name": "restrictive",
+              "rules": [
+                {
+                  "scope": "host",
+                  "filter": "10.99.3.145",
+                  "access": "rw",
+                  "suid": true,
+                  "submountAccess": true,
+                  "rootSquash": false
+                },
+                {
+                  "scope": "network",
+                  "filter": "10.99.1.0/24",
+                  "access": "rw",
+                  "suid": true,
+                  "submountAccess": true,
+                  "rootSquash": false
+                },
+                {
+                  "scope": "default",
+                  "access": "no",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": true,
+                  "anonymousUID": "-2",
+                  "anonymousGID": "-2"
                 }
               ]
             }
