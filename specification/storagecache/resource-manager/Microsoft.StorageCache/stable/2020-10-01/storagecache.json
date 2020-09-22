@@ -1366,9 +1366,12 @@
     "CacheSecuritySettings": {
       "description": "Cache security settings.",
       "properties": {
-        "rootSquash": {
-          "type": "boolean",
-          "description": "root squash of cache property."
+        "accessPolicies": {
+          "description": "NFS access policies defined for this cache.",
+          "items": {
+            "$ref": "#/definitions/NfsAccessPolicy"
+          },
+          "type": "array"
         }
       }
     },
@@ -1527,6 +1530,76 @@
             }
           }
         }
+      }
+    },
+    "NfsAccessPolicy": {
+      "description": "A set of rules describing access policies applied to NFSv3 clients of the cache.",
+      "properties": {
+        "name": {
+          "description": "Name identifying this policy.  Access Policy names are not case sensitive.",
+          "type": "string"
+        },
+        "accessRules": {
+          "description": "The set of rules describing client accesses allowed under this policy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NfsAccessRule"
+          }
+        }
+      }
+    },
+    "NfsAccessRule": {
+      "scope": {
+        "description": "Scope applied to this rule.",
+        "type": "string",
+        "enum": [
+          "default",
+          "network",
+          "host"
+        ],
+        "x-ms-enum": {
+          "name": "NfsAccessRuleScope",
+          "modelAsString": true
+        }
+      },
+      "filter": {
+        "description": "Filter applied to this rule: format depends on scope.  Default: unused, network: cidr (eg 10.99.1.0/24), host: ip address or FQDN",
+        "type": "string"
+      },
+      "access": {
+        "description": "Access allowed by this rule.",
+        "type": "string",
+        "enum": [
+          "no",
+          "ro",
+          "rw"
+        ],
+        "x-ms-enum": {
+          "name": "NfsAccessRuleAccess",
+          "modelAsString": true
+        }
+      },
+      "suid": {
+        "description": "Allow suid semantics.",
+        "type": "boolean"
+      },
+      "submountAccess": {
+        "description": "Allow mounts below the junction.",
+        "type": "boolean"
+      },
+      "rootSquash": {
+        "description": "Map root accesses to anonymousUID and anonymousGID.",
+        "type": "boolean"
+      },
+      "anonymousUID": {
+        "description": "UID value that replaces 0 when rootSquash is true.",
+        "type": "integer",
+        "default": "-2"
+      },
+      "anonymousGID": {
+        "description": "GID value that replaces 0 when rootSquash is true.",
+        "type": "integer",
+        "default": "-2"
       }
     },
     "KeyVaultKeyReference": {
@@ -1911,6 +1984,10 @@
         },
         "nfsExport": {
           "description": "NFS export where targetPath exists.",
+          "type": "string"
+        },
+        "nfsAccessPolicy": {
+          "description": "Name of the access policy applied to this junction.",
           "type": "string"
         }
       }
