@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage Caches.",
+    "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv4 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage Caches.",
     "title": "Storage Cache Mgmt Client",
     "version": "2020-10-01"
   },
@@ -1375,11 +1375,82 @@
     "CacheDirectorySettings": {
       "description": "Cache Directory Services settings.",
       "properties": {
+        "activeDirectory" : {
+          "$ref": "#/definitions/CacheActiveDirectorySettings",
+          "description": "Specifies the settings for joining the HPC Cache to an Active Directory domain."
+        },
         "usernameDownload" : {
           "$ref": "#/definitions/CacheUsernameDownloadSettings",
           "description": "Specifies the settings for Extended Groups. Extended Groups allows users to be members of more than 16 groups."
         }
       }
+    },
+    "CacheActiveDirectorySettings": {
+      "description": "Active Directory settings used to join a Cache to a Domain.",
+      "properties": {
+        "primaryDnsIpAddress": {
+          "description": "primary DNS IP address of the AD Domain controller.",
+          "type": "string"
+        },
+        "secondaryDnsIpAddress": {
+          "description": "secondary DNS IP address of the AD Domian controller.",
+          "type": "string"
+        },
+        "dnsName": {
+          "description": "DNS name of the Active Directory Domain.",
+          "type": "string"
+        },
+        "domainNetBios": {
+          "description": "The Active Directory Domain's NetBios.",
+          "type": "string"
+        },
+        "adSiteName": {
+          "description": "Site name of the Active Directory Domain.",
+          "type": "string"
+        },
+        "smbServerName": {
+          "description": "The name (NetBIOS) used for the HPC Cache to join the Active Directory Domain. Length must be not greater than 15 and chars must be in list of [-0-9a-zA-Z_] char class.",
+          "pattern": "^[-0-9a-zA-Z_]{1,15}$",
+          "type": "string"
+        },
+        "domainJoined": {
+          "description": "This field indicates if the HPC Cache is joined to the Active Directory Domain.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "x-ms-enum": {
+            "name": "DomainJoinedType",
+            "modelAsString": true
+          }
+        },
+        "credentials": {
+          "description": "Active Directory admin or user credentials used to join the HPC Cache to a Domain.",
+          "properties": {
+            "username": {
+              "description": "URI for the keyvault secret that contains the admin username to be used to join the cache to the AD domain.",
+              "type": "string"
+            },
+            "password": {
+              "description": "URI for the keyvault secret that contains the password to be used to join the cache to the AD domain.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        }
+      },
+      "type": "object",
+      "required": [
+        "primaryDnsIpAddress",
+        "secondaryDnsIpAddress",
+        "dnsName",
+        "smbServerName"
+      ]
     },
     "CacheUsernameDownloadSettings": {
       "description": "Settings for username and group download for Extended groups.",
@@ -1391,14 +1462,17 @@
         "usernameSource": {
           "description": "This setting determines how the system gets username and group names for clients.",
           "enum" : [
+            "AD",
             "LDAP",
-            "File"
+            "File",
+            "None"
           ],
           "x-ms-enum": {
             "name": "UsernameSource",
             "modelAsString": true
           },
-          "type": "string"
+          "type": "string",
+          "default": "None"
         },
         "groupFileURI": {
           "type": "string",
@@ -1431,6 +1505,12 @@
         "caCertificateURI": {
           "type": "string",
           "description": "The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to 'true'."
+        },
+        "lastUsernamePoll": {
+          "description": "Time of the last successful username download.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
         },
         "credentials": {
           "description": "When present, these are the credentials for secure LDAP connection.",
