@@ -1284,6 +1284,10 @@
             "securitySettings": {
               "$ref": "#/definitions/CacheSecuritySettings",
               "description": "Specifies security settings of the cache."
+            },
+            "directoryServicesSettings": {
+              "$ref": "#/definitions/CacheDirectorySettings",
+              "description": "Specifies Directory Services settings of the cache."
             }
           },
           "type": "object"
@@ -1368,6 +1372,163 @@
             "$ref": "#/definitions/NfsAccessPolicy"
           },
           "type": "array"
+        }
+      }
+    },
+    "CacheDirectorySettings": {
+      "description": "Cache Directory Services settings.",
+      "type": "object",
+      "properties": {
+        "activeDirectory" : {
+          "$ref": "#/definitions/CacheActiveDirectorySettings",
+          "description": "Specifies the settings for joining the HPC Cache to an Active Directory domain."
+        },
+        "usernameDownload" : {
+          "$ref": "#/definitions/CacheUsernameDownloadSettings",
+          "description": "Specifies the settings for Extended Groups. Extended Groups allows users to be members of more than 16 groups."
+        }
+      }
+    },
+    "CacheActiveDirectorySettings": {
+      "description": "Active Directory settings used to join a Cache to a Domain.",
+      "properties": {
+        "primaryDnsIpAddress": {
+          "description": "primary DNS IP address of the AD Domain controller.",
+          "type": "string"
+        },
+        "secondaryDnsIpAddress": {
+          "description": "secondary DNS IP address of the AD Domain controller.",
+          "type": "string"
+        },
+        "dnsName": {
+          "description": "DNS name of the Active Directory Domain.",
+          "type": "string"
+        },
+        "domainNetBios": {
+          "description": "The Active Directory Domain's NetBios.",
+          "type": "string"
+        },
+        "adSiteName": {
+          "description": "Site name of the Active Directory Domain.",
+          "type": "string"
+        },
+        "smbServerName": {
+          "description": "The name (NetBIOS) used for the HPC Cache to join the Active Directory Domain. Length must be not greater than 15 and chars must be in list of [-0-9a-zA-Z_] char class.",
+          "pattern": "^[-0-9a-zA-Z_]{1,15}$",
+          "type": "string"
+        },
+        "domainJoined": {
+          "description": "This field indicates if the HPC Cache is joined to the Active Directory Domain.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "x-ms-enum": {
+            "name": "DomainJoinedType",
+            "modelAsString": true
+          }
+        },
+        "credentials": {
+          "description": "Active Directory admin or user credentials used to join the HPC Cache to a Domain.",
+          "properties": {
+            "username": {
+              "description": "URI for the keyvault secret that contains the admin username to be used to join the cache to the AD domain.",
+              "type": "string"
+            },
+            "password": {
+              "description": "URI for the keyvault secret that contains the password to be used to join the cache to the AD domain.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        }
+      },
+      "type": "object",
+      "required": [
+        "primaryDnsIpAddress",
+        "secondaryDnsIpAddress",
+        "dnsName",
+        "smbServerName"
+      ]
+    },
+    "CacheUsernameDownloadSettings": {
+      "description": "Settings for username and group download for Extended groups.",
+      "type": "object",
+      "properties": {
+        "extendedGroups": {
+          "type": "boolean",
+          "description": "This indicates if Extended Groups is enabled."
+        },
+        "usernameSource": {
+          "description": "This setting determines how the system gets username and group names for clients.",
+          "enum" : [
+            "AD",
+            "LDAP",
+            "File",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "UsernameSource",
+            "modelAsString": true
+          },
+          "type": "string",
+          "default": "None"
+        },
+        "groupFileURI": {
+          "type": "string",
+          "description": "The URI of the file containing the group (etc/group) information. This field must be populated when 'usernameSource' is set to 'File'."
+        },
+        "userFileURI": {
+          "type": "string",
+          "description": "The URI of the file containing the user (etc/passwd) information. This field must be populated when 'usernameSource' is set to 'File'."
+        },
+        "ldapServer": {
+          "type": "string",
+          "description": "The fully qualified domain name or IP address of the LDAP server to use."
+        },
+        "ldapBaseDN": {
+          "type": "string",
+          "description": "The base distinguished name for the LDAP domain."
+        },
+        "encryptLdapConnection": {
+          "type": "boolean",
+          "description": "This indicates if the LDAP connection should be encrypted."
+        },
+        "requireValidCertificate": {
+          "type": "boolean",
+          "description": "Determines if the certificates should be validated by a certificate authority. When true caCerticateURI must be provided."
+        },
+        "autoDownloadCertificate": {
+          "type": "boolean",
+          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCerticateURI' when 'requireValidCerticate' is true, or a self signed certicate otherwise."
+        },
+        "caCertificateURI": {
+          "type": "string",
+          "description": "The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to 'true'."
+        },
+        "lastUsernamePoll": {
+          "description": "Time of the last successful username download.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "credentials": {
+          "description": "When present, these are the credentials for secure LDAP connection.",
+          "properties": {
+            "bindDnSecretURI": {
+              "type": "string",
+              "description": "URI for the keyvault secret which contains the Bind Distinguished Name identity to be used in the secure LDAP connection."
+            },
+            "bindPasswordSecretURI": {
+              "type": "string",
+              "description": "URI for the keyvault secret which contains the Bind password to be used in the secure LDAP connection."
+            }
+          }
         }
       }
     },
