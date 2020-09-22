@@ -1374,6 +1374,7 @@
     },
     "CacheDirectorySettings": {
       "description": "Cache Directory Services settings.",
+      "type": "object",
       "properties": {
         "activeDirectory" : {
           "$ref": "#/definitions/CacheActiveDirectorySettings",
@@ -1393,7 +1394,7 @@
           "type": "string"
         },
         "secondaryDnsIpAddress": {
-          "description": "secondary DNS IP address of the AD Domian controller.",
+          "description": "secondary DNS IP address of the AD Domain controller.",
           "type": "string"
         },
         "dnsName": {
@@ -1454,6 +1455,7 @@
     },
     "CacheUsernameDownloadSettings": {
       "description": "Settings for username and group download for Extended groups.",
+      "type": "object",
       "properties": {
         "extendedGroups": {
           "type": "boolean",
