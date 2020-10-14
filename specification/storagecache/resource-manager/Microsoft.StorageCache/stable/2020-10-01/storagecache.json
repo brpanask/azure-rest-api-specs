@@ -1397,16 +1397,12 @@
           "description": "secondary DNS IP address of the AD Domain controller.",
           "type": "string"
         },
-        "dnsName": {
-          "description": "DNS name of the Active Directory Domain.",
+        "domainName": {
+          "description": "The Fully Qualified Domain Name of the Active Directory Domain.",
           "type": "string"
         },
         "domainNetBios": {
           "description": "The Active Directory Domain's NetBios.",
-          "type": "string"
-        },
-        "adSiteName": {
-          "description": "Site name of the Active Directory Domain.",
           "type": "string"
         },
         "smbServerName": {
@@ -1431,11 +1427,11 @@
           "description": "Active Directory admin or user credentials used to join the HPC Cache to a Domain.",
           "properties": {
             "username": {
-              "description": "URI for the keyvault secret that contains the admin username to be used to join the cache to the AD domain.",
+              "description": "User name of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
               "type": "string"
             },
             "password": {
-              "description": "URI for the keyvault secret that contains the password to be used to join the cache to the AD domain.",
+              "description": "Plain text password of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
               "type": "string"
             }
           },
@@ -1517,13 +1513,13 @@
         "credentials": {
           "description": "When present, these are the credentials for secure LDAP connection.",
           "properties": {
-            "bindDnSecretURI": {
+            "bindDn": {
               "type": "string",
-              "description": "URI for the keyvault secret which contains the Bind Distinguished Name identity to be used in the secure LDAP connection."
+              "description": "The Bind Distinguished Name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
             },
-            "bindPasswordSecretURI": {
+            "bindPassword": {
               "type": "string",
-              "description": "URI for the keyvault secret which contains the Bind password to be used in the secure LDAP connection."
+              "description": "The Bind password to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
             }
           }
         }
