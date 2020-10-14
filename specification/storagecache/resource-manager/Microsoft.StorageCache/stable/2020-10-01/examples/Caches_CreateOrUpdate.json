@@ -58,6 +58,22 @@
           "networkSettings": {
             "mtu": 1500
           },
+          "securitySettings": {
+            "accessPolicies": [
+              {
+                "name": "default",
+                "accessRules": [
+                  {
+                    "scope": "default",
+                    "access": "rw",
+                    "suid": false,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  }
+                ]
+              }
+            ]
+          },
           "encryptionSettings": {
             "keyEncryptionKey": {
               "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
@@ -103,6 +119,22 @@
           "networkSettings": {
             "mtu": 1500
           },
+          "securitySettings": {
+            "accessPolicies": [
+              {
+                "name": "default",
+                "accessRules": [
+                  {
+                    "scope": "default",
+                    "access": "rw",
+                    "suid": false,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  }
+                ]
+              }
+            ]
+          },
           "encryptionSettings": {
             "keyEncryptionKey": {
               "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
@@ -147,6 +179,22 @@
           },
           "networkSettings": {
             "mtu": 1500
+          },
+          "securitySettings": {
+            "accessPolicies": [
+              {
+                "name": "default",
+                "accessRules": [
+                  {
+                    "scope": "default",
+                    "access": "rw",
+                    "suid": false,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  }
+                ]
+              }
+            ]
           },
           "encryptionSettings": {
             "keyEncryptionKey": {
