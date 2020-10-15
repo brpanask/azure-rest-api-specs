@@ -1435,6 +1435,7 @@
             },
             "password": {
               "description": "Plain text password of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
+              "x-ms-secret": true,
               "type": "string"
             }
           },
@@ -1522,6 +1523,7 @@
             },
             "bindPassword": {
               "type": "string",
+              "x-ms-secret": true,
               "description": "The Bind password to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
             }
           }
