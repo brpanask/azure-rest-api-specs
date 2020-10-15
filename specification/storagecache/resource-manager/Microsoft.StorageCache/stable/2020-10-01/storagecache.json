@@ -1432,7 +1432,7 @@
       "required": [
         "primaryDnsIpAddress",
         "secondaryDnsIpAddress",
-        "dnsName",
+        "domainName",
         "smbServerName"
       ]
     },
