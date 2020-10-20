@@ -11,13 +11,36 @@
       "location": "westus",
       "properties": {
         "cacheSizeGB": 3072,
-        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1"
-      },
-      "encryptionSettings": {
-        "keyEncryptionKey": {
-          "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
-          "sourceVault": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+        "encryptionSettings": {
+          "keyEncryptionKey": {
+            "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2047/test",
+            "sourceVault": {
+                  "id": "/subscriptions/037777777777-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+            }
+          }
+        },
+        "directoryServicesSettings": {
+          "activeDirectory": {
+            "primaryDnsIpAddress": "192.0.2.10",
+            "secondaryDnsIpAddress": "192.0.2.11",
+            "smbServerName": "contosoSmb",
+            "domainName": "contosoAd.contoso.local",
+            "domainNetBios": "contosoAd",
+            "credentials": {
+              "username":"consotoAdmin",
+              "password":"pasword123"
+            }
+          },
+          "usernameDownload": {
+            "extendedGroups": true,
+            "usernameSource": "LDAP",
+            "ldapServer": "192.0.2.12",
+            "ldapBaseDn": "dc=contosoad,dc=contoso,dc=local",
+            "credentials": {
+              "bindDn":"cn=ldapadmin,dc=contosoad,dc=contoso,dc=local",
+              "bindPassword":"ldapPassword123"
+            }
           }
         }
       },
@@ -81,6 +104,29 @@
                     "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
               }
             }
+          },
+          "directoryServicesSettings": {
+            "activeDirectory": {
+              "primaryDnsIpAddress": "192.0.2.10",
+              "secondaryDnsIpAddress": "192.0.2.11",
+              "domainName": "contosoAd.contoso.local",
+              "domainNetBios": "contosoAd",
+              "smbServerName": "contosoSmb",
+              "domainJoined": "No"
+            },
+            "usernameDownload": {
+              "extendedGroups": true,
+              "usernameSource": "LDAP",
+              "groupFileURI": "",
+              "userFileURI": "",
+              "ldapServer": "192.0.2.12",
+              "ldapBaseDn": "dc=contosoad,dc=contoso,dc=local",
+              "encryptLdapConnection": false,
+              "requireValidCertificate": false,
+              "autoDownloadCertificate": false,
+              "caCertificateURI": "",
+              "usernamePolled": "No"
+            }
           }
         },
         "sku": {
@@ -142,6 +188,29 @@
                     "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
               }
             }
+          },
+          "directoryServicesSettings": {
+            "activeDirectory": {
+              "primaryDnsIpAddress": "192.0.2.10",
+              "secondaryDnsIpAddress": "192.0.2.11",
+              "domainName": "contosoAd.contoso.local",
+              "domainNetBios": "contosoAd",
+              "smbServerName": "contosoSmb",
+              "domainJoined": "No"
+            },
+            "usernameDownload": {
+              "extendedGroups": true,
+              "usernameSource": "LDAP",
+              "groupFileURI": "",
+              "userFileURI": "",
+              "ldapServer": "192.0.2.12",
+              "ldapBaseDn": "dc=contosoad,dc=contoso,dc=local",
+              "encryptLdapConnection": false,
+              "requireValidCertificate": false,
+              "autoDownloadCertificate": false,
+              "caCertificateURI": "",
+              "usernamePolled": "No"
+            }
           }
         },
         "sku": {
@@ -202,6 +271,29 @@
               "sourceVault": {
                     "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
               }
+            }
+          },
+          "directoryServicesSettings": {
+            "activeDirectory": {
+              "primaryDnsIpAddress": "192.0.2.10",
+              "secondaryDnsIpAddress": "192.0.2.11",
+              "domainName": "contosoAd.contoso.local",
+              "domainNetBios": "contosoAd",
+              "smbServerName": "contosoSmb",
+              "domainJoined": "Yes"
+            },
+            "usernameDownload": {
+              "extendedGroups": true,
+              "usernameSource": "LDAP",
+              "groupFileURI": "",
+              "userFileURI": "",
+              "ldapServer": "192.0.2.12",
+              "ldapBaseDn": "dc=contosoad,dc=contoso,dc=local",
+              "encryptLdapConnection": false,
+              "requireValidCertificate": false,
+              "autoDownloadCertificate": false,
+              "caCertificateURI": "",
+              "usernamePolled": "Yes"
             }
           }
         },
