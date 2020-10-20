@@ -11,14 +11,30 @@
       "location": "westus",
       "properties": {
         "cacheSizeGB": 3072,
-        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1"
-      },
-      "encryptionSettings": {
-        "keyEncryptionKey": {
-          "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
-          "sourceVault": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+        "encryptionSettings": {
+          "keyEncryptionKey": {
+            "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
+            "sourceVault": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+            }
           }
+        },
+        "securitySettings": {
+          "accessPolicies": [
+            {
+              "name": "default",
+              "accessRules": [
+                {
+                  "scope": "default",
+                  "access": "rw",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": false
+                }
+              ]
+            }
+          ]
         }
       },
       "sku": {
@@ -78,7 +94,7 @@
             "keyEncryptionKey": {
               "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
               "sourceVault": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
               }
             }
           }
@@ -139,7 +155,7 @@
             "keyEncryptionKey": {
               "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
               "sourceVault": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
               }
             }
           }
@@ -200,7 +216,7 @@
             "keyEncryptionKey": {
               "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
               "sourceVault": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
               }
             }
           }

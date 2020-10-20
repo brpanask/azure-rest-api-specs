@@ -7,7 +7,6 @@
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "id": "/subscriptions/id/locations/westus/ascOperations/testoperationid",
         "name": "testoperationid",
@@ -15,6 +14,10 @@
         "endTime": "2020-03-01T16:13:13.933Z",
         "status": "Succeeded"
       }
+    },
+    "202": {
+    },
+    "204": {
     }
   }
 }
