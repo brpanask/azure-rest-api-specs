@@ -187,7 +187,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets the status of an asynchronous operation for the Azure HPC cache",
+            "description": "The asynchronous operation was returned.",
             "schema": {
               "$ref": "#/definitions/AscOperation"
             }
@@ -332,16 +332,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache deleted.",
-            "schema": {}
+            "description": "Cache deleted."
           },
           "202": {
-            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor.",
-            "schema": {}
+            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor."
           },
           "204": {
-            "description": "Cache deleted.",
-            "schema": {}
+            "description": "Cache deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -465,6 +462,12 @@
               "$ref": "#/definitions/Cache"
             }
           },
+          "202": {
+            "description": "Cache creation or update has been initiated. Poll the new Cache's provisioningState property to monitor creation progress.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -578,16 +581,13 @@
         ],
         "responses": {
           "200": {
-            "description": "All cached data has been flushed to the Storage Target(s).",
-            "schema": {}
+            "description": "All cached data has been flushed to the Storage Target(s)."
           },
           "202": {
-            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor.",
-            "schema": {}
+            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor."
           },
           "204": {
-            "description": "Cache flush already in progress or has completed.",
-            "schema": {}
+            "description": "Cache flush already in progress or has completed."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -642,16 +642,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache is Active.",
-            "schema": {}
+            "description": "Restarted VMs associated with the cache."
           },
           "202": {
-            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor.",
-            "schema": {}
+            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor."
           },
           "204": {
-            "description": "Restarted VMs associated with the cache.",
-            "schema": {}
+            "description": "Restarted VMs associated with the cache."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -706,16 +703,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache is stopped.",
-            "schema": {}
+            "description": "Stopped VMs associated with the cache."
           },
           "202": {
-            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor.",
-            "schema": {}
+            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor."
           },
           "204": {
-            "description": "Stopped VMs associated with the cache.",
-            "schema": {}
+            "description": "Stopped VMs associated with the cache."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -835,16 +829,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Storage target deleted.",
-            "schema": {}
+            "description": "Storage target deleted."
           },
           "202": {
-            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor.",
-            "schema": {}
+            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor."
           },
           "204": {
-            "description": "Storage Target deleted.",
-            "schema": {}
+            "description": "Storage Target deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -984,6 +975,12 @@
               "$ref": "#/definitions/StorageTarget"
             }
           },
+          "202": {
+            "description": "Storage Target creation or update has been initiated. Poll the new Storage Target's provisioningState property to monitor creation progress.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -997,6 +994,9 @@
           },
           "StorageTargets_CreateOrUpdate_NoJunctions": {
             "$ref": "./examples/StorageTargets_CreateOrUpdate_NoJunctions.json"
+          },
+          "StorageTargets_CreateOrUpdate_BlobNfs": {
+            "$ref": "./examples/StorageTargets_CreateOrUpdate_BlobNfs.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1036,17 +1036,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Cache firmware is up to date.",
-            "schema": {}
+          "200": {
+            "description": "Cache firmware is up to date."
           },
           "202": {
-            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor.",
-            "schema": {}
+            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor."
           },
           "204": {
-            "description": "Cache firmware is up to date.",
-            "schema": {}
+            "description": "Cache firmware is up to date."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1234,7 +1231,8 @@
           "properties": {
             "cacheSizeGB": {
               "description": "The size of this Cache, in GB.",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "health": {
               "description": "Health of the Cache.",
@@ -1339,6 +1337,7 @@
         "mtu": {
           "description": "The IPv4 maximum transmission unit configured for the subnet.",
           "type": "integer",
+          "format": "int32",
           "minimum": 576,
           "maximum": 1500,
           "default": 1500
@@ -1450,7 +1449,7 @@
       "required": [
         "primaryDnsIpAddress",
         "secondaryDnsIpAddress",
-        "dnsName",
+        "domainName",
         "smbServerName"
       ]
     },
@@ -1556,57 +1555,60 @@
       }
     },
     "NfsAccessRule": {
-      "scope": {
-        "description": "Scope applied to this rule.",
-        "type": "string",
-        "enum": [
-          "default",
-          "network",
-          "host"
-        ],
-        "x-ms-enum": {
-          "name": "NfsAccessRuleScope",
-          "modelAsString": true
+      "description": "Rule to place restrictions on portions of the NFS namespace being presented to clients.",
+      "properties": {
+        "scope": {
+          "description": "Scope applied to this rule.",
+          "type": "string",
+          "enum": [
+            "default",
+            "network",
+            "host"
+          ],
+          "x-ms-enum": {
+            "name": "NfsAccessRuleScope",
+            "modelAsString": true
+          }
+        },
+        "filter": {
+          "description": "Filter applied to this rule: format depends on scope.  Default: unused, network: CIDR (eg 10.99.1.0/24), host: IP address or FQDN",
+          "type": "string"
+        },
+        "access": {
+          "description": "Access allowed by this rule.",
+          "type": "string",
+          "enum": [
+            "no",
+            "ro",
+            "rw"
+          ],
+          "x-ms-enum": {
+            "name": "NfsAccessRuleAccess",
+            "modelAsString": true
+          }
+        },
+        "suid": {
+          "description": "Allow SUID semantics.",
+          "type": "boolean"
+        },
+        "submountAccess": {
+          "description": "Allow mounts below the junction.",
+          "type": "boolean"
+        },
+        "rootSquash": {
+          "description": "Map root accesses to anonymousUID and anonymousGID.",
+          "type": "boolean"
+        },
+        "anonymousUID": {
+          "description": "UID value that replaces 0 when rootSquash is true.",
+          "type": "string",
+          "default": "-2"
+        },
+        "anonymousGID": {
+          "description": "GID value that replaces 0 when rootSquash is true.",
+          "type": "string",
+          "default": "-2"
         }
-      },
-      "filter": {
-        "description": "Filter applied to this rule: format depends on scope.  Default: unused, network: cidr (eg 10.99.1.0/24), host: ip address or FQDN",
-        "type": "string"
-      },
-      "access": {
-        "description": "Access allowed by this rule.",
-        "type": "string",
-        "enum": [
-          "no",
-          "ro",
-          "rw"
-        ],
-        "x-ms-enum": {
-          "name": "NfsAccessRuleAccess",
-          "modelAsString": true
-        }
-      },
-      "suid": {
-        "description": "Allow suid semantics.",
-        "type": "boolean"
-      },
-      "submountAccess": {
-        "description": "Allow mounts below the junction.",
-        "type": "boolean"
-      },
-      "rootSquash": {
-        "description": "Map root accesses to anonymousUID and anonymousGID.",
-        "type": "boolean"
-      },
-      "anonymousUID": {
-        "description": "UID value that replaces 0 when rootSquash is true.",
-        "type": "integer",
-        "default": "-2"
-      },
-      "anonymousGID": {
-        "description": "GID value that replaces 0 when rootSquash is true.",
-        "type": "integer",
-        "default": "-2"
       }
     },
     "KeyVaultKeyReference": {
@@ -1780,7 +1782,8 @@
           "enum": [
             "nfs3",
             "clfs",
-            "unknown"
+            "unknown",
+            "blobNfs"
           ],
           "x-ms-enum": {
             "name": "StorageTargetType",
@@ -1815,11 +1818,15 @@
         "unknown": {
           "description": "Properties when targetType is unknown.",
           "$ref": "#/definitions/UnknownTarget"
+        },
+        "blobNfs": {
+          "description": "Properties when targetType is blobNfs.",
+          "$ref": "#/definitions/BlobNfsTarget"
         }
       }
     },
     "Nfs3Target": {
-      "description": "Properties pertained to Nfs3Target",
+      "description": "Properties pertaining to the Nfs3Target",
       "properties": {
         "target": {
           "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
@@ -1827,13 +1834,13 @@
           "type": "string"
         },
         "usageModel": {
-          "description": "Identifies the primary usage model to be used for this Storage Target. Get choices from .../usageModels",
+          "description": "Identifies the usage model to be used for this Storage Target. Get choices from .../usageModels",
           "type": "string"
         }
       }
     },
     "ClfsTarget": {
-      "description": "Properties pertained to ClfsTarget",
+      "description": "Properties pertaining to the ClfsTarget",
       "properties": {
         "target": {
           "description": "Resource ID of storage container.",
@@ -1842,11 +1849,24 @@
       }
     },
     "UnknownTarget": {
-      "description": "Properties pertained to UnknownTarget",
+      "description": "Properties pertaining to the UnknownTarget",
       "properties": {
         "unknownMap": {
           "description": "Dictionary of string->string pairs containing information about the Storage Target.",
           "$ref": "#/definitions/UnknownProperties"
+        }
+      }
+    },
+    "BlobNfsTarget": {
+      "description": "Properties pertaining to the BlobNfsTarget",
+      "properties": {
+        "target": {
+          "description": "Resource ID of storage container.",
+          "$ref": "#/definitions/URLString"
+        },
+        "usageModel": {
+          "description": "Identifies the usage model to be used for this Storage Target. Get choices from .../usageModels",
+          "type": "string"
         }
       }
     },
