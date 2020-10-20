@@ -187,7 +187,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets the status of an asynchronous operation for the Azure HPC cache",
+            "description": "The asynchronous operation was returned.",
             "schema": {
               "$ref": "#/definitions/AscOperation"
             }
@@ -462,6 +462,12 @@
               "$ref": "#/definitions/Cache"
             }
           },
+          "202": {
+            "description": "Cache creation or update has been initiated. Poll the new Cache's provisioningState property to monitor creation progress.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -636,7 +642,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache is Active."
+            "description": "Restarted VMs associated with the cache."
           },
           "202": {
             "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor."
@@ -697,7 +703,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache is stopped."
+            "description": "Stopped VMs associated with the cache."
           },
           "202": {
             "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor."
@@ -969,6 +975,12 @@
               "$ref": "#/definitions/StorageTarget"
             }
           },
+          "202": {
+            "description": "Storage Target creation or update has been initiated. Poll the new Storage Target's provisioningState property to monitor creation progress.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -982,6 +994,9 @@
           },
           "StorageTargets_CreateOrUpdate_NoJunctions": {
             "$ref": "./examples/StorageTargets_CreateOrUpdate_NoJunctions.json"
+          },
+          "StorageTargets_CreateOrUpdate_BlobNfs": {
+            "$ref": "./examples/StorageTargets_CreateOrUpdate_BlobNfs.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1021,7 +1036,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Cache firmware is up to date."
           },
           "202": {
@@ -1545,7 +1560,7 @@
           }
         },
         "filter": {
-          "description": "Filter applied to this rule: format depends on scope.  Default: unused, network: cidr (eg 10.99.1.0/24), host: ip address or FQDN",
+          "description": "Filter applied to this rule: format depends on scope.  Default: unused, network: CIDR (eg 10.99.1.0/24), host: IP address or FQDN",
           "type": "string"
         },
         "access": {
@@ -1562,7 +1577,7 @@
           }
         },
         "suid": {
-          "description": "Allow suid semantics.",
+          "description": "Allow SUID semantics.",
           "type": "boolean"
         },
         "submountAccess": {
@@ -1800,7 +1815,7 @@
       }
     },
     "Nfs3Target": {
-      "description": "Properties pertained to Nfs3Target",
+      "description": "Properties pertaining to the Nfs3Target",
       "properties": {
         "target": {
           "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
@@ -1808,13 +1823,13 @@
           "type": "string"
         },
         "usageModel": {
-          "description": "Identifies the primary usage model to be used for this Storage Target. Get choices from .../usageModels",
+          "description": "Identifies the usage model to be used for this Storage Target. Get choices from .../usageModels",
           "type": "string"
         }
       }
     },
     "ClfsTarget": {
-      "description": "Properties pertained to ClfsTarget",
+      "description": "Properties pertaining to the ClfsTarget",
       "properties": {
         "target": {
           "description": "Resource ID of storage container.",
@@ -1823,7 +1838,7 @@
       }
     },
     "UnknownTarget": {
-      "description": "Properties pertained to UnknownTarget",
+      "description": "Properties pertaining to the UnknownTarget",
       "properties": {
         "unknownMap": {
           "description": "Dictionary of string->string pairs containing information about the Storage Target.",
@@ -1832,14 +1847,14 @@
       }
     },
     "BlobNfsTarget": {
-      "description": "Properties pertained to BlobNfsTarget",
+      "description": "Properties pertaining to the BlobNfsTarget",
       "properties": {
         "target": {
           "description": "Resource ID of storage container.",
           "$ref": "#/definitions/URLString"
         },
         "usageModel": {
-          "description": "Identifies the primary usage model to be used for this Storage Target. Get choices from .../usageModels",
+          "description": "Identifies the usage model to be used for this Storage Target. Get choices from .../usageModels",
           "type": "string"
         }
       }
