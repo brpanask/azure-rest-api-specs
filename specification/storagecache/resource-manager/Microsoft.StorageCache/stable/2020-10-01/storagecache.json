@@ -1418,7 +1418,8 @@
           "readOnly": true,
           "enum": [
             "Yes",
-            "No"
+            "No",
+            "Error"
           ],
           "x-ms-enum": {
             "name": "DomainJoinedType",
@@ -1507,11 +1508,19 @@
           "type": "string",
           "description": "The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to 'true'."
         },
-        "lastUsernamePoll": {
-          "description": "Time of the last successful username download.",
-          "format": "date-time",
+        "usernamePolled": {
+          "description": "Indicates if the HPC Cache has performed the username download successfully.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Yes",
+            "No",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "UsernamePolledType",
+            "modelAsString": true
+          }
         },
         "credentials": {
           "description": "When present, these are the credentials for secure LDAP connection.",

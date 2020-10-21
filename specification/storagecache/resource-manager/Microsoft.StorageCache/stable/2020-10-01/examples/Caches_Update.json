@@ -60,6 +60,19 @@
               ]
             }
           ]
+        },
+        "directoryServicesSettings": {
+          "activeDirectory": {
+            "primaryDnsIpAddress": "192.0.2.10",
+            "secondaryDnsIpAddress": "192.0.2.11",
+            "smbServerName": "contosoSmb",
+            "domainName": "contosoAd.contoso.local",
+            "domainNetBios": "contosoAd"
+          },
+          "usernameDownload": {
+            "extendedGroups": true,
+            "usernameSource": "AD",
+          }
         }
       },
       "sku": {
