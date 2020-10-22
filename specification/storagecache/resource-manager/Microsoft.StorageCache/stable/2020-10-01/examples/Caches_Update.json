@@ -71,7 +71,7 @@
           },
           "usernameDownload": {
             "extendedGroups": true,
-            "usernameSource": "AD",
+            "usernameSource": "AD"
           }
         }
       },

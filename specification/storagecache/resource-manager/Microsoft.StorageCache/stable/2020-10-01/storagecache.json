@@ -1488,7 +1488,7 @@
           "type": "string",
           "description": "The fully qualified domain name or IP address of the LDAP server to use."
         },
-        "ldapBaseDN": {
+        "ldapBaseDn": {
           "type": "string",
           "description": "The base distinguished name for the LDAP domain."
         },
