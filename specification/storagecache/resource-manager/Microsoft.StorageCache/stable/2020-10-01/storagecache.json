@@ -1225,6 +1225,11 @@
           "$ref": "#/definitions/CacheIdentity",
           "description": "The identity of the cache, if configured."
         },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of the Cache.",
@@ -1759,6 +1764,16 @@
           "description": "Type of the Storage Target; Microsoft.StorageCache/Cache/StorageTarget",
           "readOnly": true,
           "type": "string"
+        },
+        "location": {
+          "description": "Region name string.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
